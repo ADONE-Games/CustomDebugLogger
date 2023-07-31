@@ -1,5 +1,6 @@
-# CustomDebugLog
-Unity DebugLog
+# CustomDebugLogger
+![Unity](https://img.shields.io/badge/Framework-Unity-blue) ![LICENSE](https://img.shields.io/badge/License-MIT-magenta)  
+![DebugLog](https://img.shields.io/badge/Unity-DebugLog-FFFFFF)
 
 
 # まだ書き途中
