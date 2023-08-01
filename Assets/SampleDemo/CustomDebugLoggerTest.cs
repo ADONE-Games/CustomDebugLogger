@@ -14,6 +14,7 @@ namespace Scenes
         }
 
         // MonoBehaviourを使わない場合は、こんな方法もある
+        // --------------------------
         // Here's another method you can use if you're not using MonoBehaviour.
         // [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
         // private static void Initialize()
