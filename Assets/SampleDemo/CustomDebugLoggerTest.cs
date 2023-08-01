@@ -1,17 +1,24 @@
+using System;
+
 using ADONEGames.CustomDebugLogger;
 
 using UnityEngine;
 
 namespace Scenes
 {
-    public static class CustomDebugLoggerTest
+    public class CustomDebugLoggerTest : MonoBehaviour
     {
-        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
-        private static void Initialize()
+        private void Start()
         {
             LoggerSetup.Initialize( handler => new ConsoleLoggerEvent( handler ), handler => new FileLoggerEvent( handler ) );
-
-            Application.quitting += LoggerSetup.Dispose;
         }
+
+        // MonoBehaviourを使わない場合は、こんな方法もある
+        // Here's another method you can use if you're not using MonoBehaviour.
+        // [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
+        // private static void Initialize()
+        // {
+        //     LoggerSetup.Initialize( handler => new ConsoleLoggerEvent( handler ), handler => new FileLoggerEvent( handler ) );
+        // }
     }
 }

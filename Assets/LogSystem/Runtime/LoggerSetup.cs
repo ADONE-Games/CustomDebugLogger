@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ADONEGames.CustomDebugLogger
 {
     
@@ -8,9 +10,11 @@ namespace ADONEGames.CustomDebugLogger
         public static void Initialize( params LoggerEventFactory[] loggerEventFactories )
         {
             LoggerEventInstance ??= new LoggerEventManager( loggerEventFactories );
+            
+            Application.quitting += LoggerSetup.Dispose;
         }
 
-        public static void Dispose()
+        private static void Dispose()
         {
             LoggerEventInstance.Dispose();
         }
