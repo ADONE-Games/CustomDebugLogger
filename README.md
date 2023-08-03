@@ -9,7 +9,7 @@ Debug.Log/Debug.LogWarning/Debug.LogErrorなどが、
 # 使用方法  
 ```ADONEGames.CustomDebugLogger.AbstractLoggerEvent```を継承し作成した自身のクラスを  
 ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params LoggerEventFactory[] )```で指定する。  
-## 例
+## 例１
 ```
     public class LoggerTest : MonoBehaviour
     {
@@ -19,10 +19,28 @@ Debug.Log/Debug.LogWarning/Debug.LogErrorなどが、
         }
     }
 ```
+## 例2
+```
+    public class CustomDebugLoggerTest
+    {
+        // スプラッシュシーン前に自動起動
+        [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
+        private static void Initialize()
+        {
+            LoggerSetup.Initialize( handler => new ConsoleLoggerEvent( handler ), handler => new FileLoggerEvent( handler ) );
+        }
+    }
 
-|ADONEGames.CustomDebugLogger|
-|--------------------------- |
-|AbstractLoggerEvent|
+```
+
+
+# 機能
+|ADONEGames.CustomDebugLogger|||
+|-|-|-|
+|AbstractLoggerEvent|追加処理の抽象クラス||
+|ConsoleLoggerEvent|コンソール表示|AbstractLoggerEventを継承|
+|FileLoggerEvent|ファイル書き出し|AbstractLoggerEventを継承|
+
 
 # まだ書き途中
 
