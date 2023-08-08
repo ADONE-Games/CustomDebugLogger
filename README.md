@@ -34,12 +34,17 @@ Debug.Log/Debug.LogWarning/Debug.LogErrorなどが、
 ```
 
 
-# 機能
+# イベント機能
+|ADONEGames.CustomDebugLogger||
+|- |- |
+|AbstractLoggerEvent|追加処理の抽象クラス|
+<hr>
+
 |ADONEGames.CustomDebugLogger|||
-|-|-|-|
-|AbstractLoggerEvent|追加処理の抽象クラス||
+|- |- |- |
 |ConsoleLoggerEvent|コンソール表示|AbstractLoggerEventを継承|
 |FileLoggerEvent|ファイル書き出し|AbstractLoggerEventを継承|
+<hr>
 
 
 # まだ書き途中
