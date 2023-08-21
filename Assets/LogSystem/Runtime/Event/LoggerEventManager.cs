@@ -14,7 +14,7 @@ namespace ADONEGames.CustomDebugLogger
         /// <summary>
         /// 元の <see cref="Debug"/>で生成された<see cref="ILogHandler"/>
         /// </summary>
-        private readonly ILogHandler _originalDebugLogHandler;
+        private ILogHandler OriginalDebugLogHandler { get; }
 
         /// <summary>
         /// <see cref="LoggerEventFactory"/>delegateで生成された<see cref="AbstractLoggerEvent"/>を継承した<see cref="ILoggerEvent"/>の配列
@@ -37,7 +37,7 @@ namespace ADONEGames.CustomDebugLogger
         /// <param name="loggerEventFactories"><see cref="AbstractLoggerEvent"/>を生成するデリゲートオプション</param>
         public LoggerEventManager( params LoggerEventFactory[] loggerEventFactories )
         {
-            _originalDebugLogHandler = Debug.unityLogger.logHandler;
+            OriginalDebugLogHandler = Debug.unityLogger.logHandler;
 
             Debug.unityLogger.logHandler = this;
 
@@ -45,7 +45,7 @@ namespace ADONEGames.CustomDebugLogger
 
             for( int i = 0; i < loggerEventFactories.Length; i++ )
             {
-                _loggerEvents[ i ] =  loggerEventFactories[ i ]( _originalDebugLogHandler );
+                _loggerEvents[ i ] =  loggerEventFactories[ i ]( OriginalDebugLogHandler );
                 logFormatEvent     += _loggerEvents[ i ].LogFormat;
                 logExceptionEvent  += _loggerEvents[ i ].LogException;
             }
@@ -66,7 +66,7 @@ namespace ADONEGames.CustomDebugLogger
         /// <inheritdoc />
         public void Dispose()
         {
-            Debug.unityLogger.logHandler = _originalDebugLogHandler;
+            Debug.unityLogger.logHandler = OriginalDebugLogHandler;
 
             foreach( var loggerEvent in _loggerEvents )
             {
