@@ -1,5 +1,5 @@
 # CustomDebugLogger
-![Unity](https://img.shields.io/badge/Framework-Unity-blue) ![LICENSE](https://img.shields.io/badge/License-MIT-magenta)  
+![Unity](https://img.shields.io/badge/Framework-Unity-blue) ![Unity](https://img.shields.io/badge/UnityVersion-2021.3-0000FF) ![.Net](https://img.shields.io/badge/.Net-Standard_2.1-AACCEE) ![LICENSE](https://img.shields.io/badge/License-MIT-magenta)  
 ![DebugLog](https://img.shields.io/badge/Unity-DebugLog-FFFFFF)
 
 # 目次
