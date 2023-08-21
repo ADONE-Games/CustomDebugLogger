@@ -14,12 +14,19 @@
   - [イベントの登録](#イベントの登録)
 - [コントローラー機能](#コントローラー機能)
 
+
 - [ライセンス](#ライセンス)
 <hr>
 
 # 説明
 
 Debug.Log/Debug.LogWarning/Debug.LogErrorなどでコンソールに表示される前に独自の処理を追加する。
+
+### インストール
+Unity Package Managerからインストールする。
+- Window -> Package Manager
+- "+" -> Add package from git URL...   
+```https://github.com/ADONE-Games/CustomDebugLogger.git?path=/Assets/LogSystem```
 <hr>
 
 ## 機能構造

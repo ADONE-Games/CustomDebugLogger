@@ -14,12 +14,19 @@
   - [Registering Events](#registering-events)
 - [Provided Controller Functionality](#provided-controller-functionality)
 
+
 - [License](#license)
 <hr>
 
 # Description
 
 Add custom processing before being displayed in the console using Debug.Log, Debug.LogWarning, Debug.LogError, etc.
+
+### Installation
+Install from Unity Package Manager.
+- Window -> Package Manager
+- "+" -> Add package from git URL...   
+```https://github.com/ADONE-Games/CustomDebugLogger.git?path=/Assets/LogSystem```
 <hr>
 
 ## Function structure
