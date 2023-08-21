@@ -228,7 +228,7 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
     }
 ```
 
-https://github.com/ADONE-Games/CustomDebugLogger/assets/41104542/daf1c788-48b4-418c-aac7-8c42a838545e
+https://github.com/ADONE-Games/CustomDebugLogger/assets/41104542/adbc96f8-7e35-4532-9b05-6da93e9ca42a
 <hr>
 
 
