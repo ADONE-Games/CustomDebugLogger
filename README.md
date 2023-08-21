@@ -123,8 +123,8 @@ classDiagram
     AbstractLoggerEvent"use" -- DebugLogHandler
     
 
-    ConsoleLoggerController --|> AbstractLoggerController 
     Debug <-- ConsoleLoggerController : Send Debug.Log / Debug.LogWarning / Debug.LogError messages
+    AbstractLoggerController <|-- ConsoleLoggerController
 ```
 
 <details>
