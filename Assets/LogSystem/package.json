@@ -1,7 +1,7 @@
 {
  "name": "games.adone.custom-debug-logger",
   "displayName": "Custom Debug Logger",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2021.3",
   "description": "Debug.Log/Debug.LogWarning/Debug.LogErrorなどでコンソールに表示される前に独自の処理を追加する。\nAdd custom processing before being displayed in the console using Debug.Log, Debug.LogWarning, Debug.LogError, etc.",
   "license": "MIT",
