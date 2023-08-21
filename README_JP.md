@@ -2,31 +2,29 @@
 ![Unity](https://img.shields.io/badge/Framework-Unity-blue) ![LICENSE](https://img.shields.io/badge/License-MIT-magenta)  
 ![DebugLog](https://img.shields.io/badge/Unity-DebugLog-FFFFFF)
 
-# Table of Contents
+# 目次
+- [説明](#説明)
+  - [機能構造](#機能構造)
+- [使用方法](#使用方法)
+  - [初期化](#初期化)
+    - [例1](#例1)
+    - [例2](#例2)
+  - [実行](#実行)
+- [イベント機能](#イベント機能)
+  - [イベントの登録](#イベントの登録)
+- [コントローラー機能](#コントローラー機能)
 <hr>
 
-- [Description](#description)
-  - [Function structure](#function-structure)
-- [Usage](#usage)
-  - [Initialize](#initialize)
-    - [Example 1](#example-1)
-    - [Example 2](#example-2)
-  - [Run](#run)
-- [Provided Event Functionality](#provided-event-functionality)
-  - [Registering Events](#registering-events)
-- [Provided Controller Functionality](#provided-controller-functionality)
+- [ライセンス](#ライセンス)
 <hr>
 
-- [License](#license)
+# 説明
 <hr>
 
-# Description
+Debug.Log/Debug.LogWarning/Debug.LogErrorなどでコンソールに表示される前に独自の処理を追加する。
 <hr>
 
-Add custom processing before being displayed in the console using Debug.Log, Debug.LogWarning, Debug.LogError, etc.
-<hr>
-
-## Function structure
+## 機能構造
 ```mermaid
 classDiagram
     direction TB
@@ -139,11 +137,11 @@ classDiagram
     
 
     ConsoleLoggerController --|> AbstractLoggerController 
-    Debug <-- ConsoleLoggerController : Send Debug.Log / Debug.LogWarning / Debug.LogError messages
+    Debug <-- ConsoleLoggerController : Debug.Log / Debug.LogWarning / Debug.LogErrorメッセージを送信
 ```
 
 <details>
-<summary>The original structure of the Debug.Log series</summary>
+<summary>元のDebug.Log系の構造</summary>
 
 ```mermaid
 classDiagram
@@ -190,17 +188,17 @@ classDiagram
 </details>
 <hr>
 
-# Usage
+# 使用方法
 <hr>
 
-Create your own class inheriting from ```ADONEGames.CustomDebugLogger.AbstractLoggerEvent```.  
-Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params LoggerEventFactory[] )```.
+```ADONEGames.CustomDebugLogger.AbstractLoggerEvent```を継承した自身のクラス作成  
+```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params LoggerEventFactory[] )```で指定する。
 <hr>
 
-## Initialize
+## 初期化
 <hr>
 
-### Example 1
+### 例1
 <hr>
 
 ```csharp
@@ -214,13 +212,13 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
 ```
 <hr>
 
-### Example 2
+### 例2
 <hr>
 
 ```csharp
     public class LoggerTest
     {
-        // Auto-start before the splash scene
+        // スプラッシュシーン前に自動起動
         [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSplashScreen )]
         private static void Initialize()
         {
@@ -230,7 +228,7 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
 ```
 <hr>
 
-## Run
+## 実行
 <hr>
 
 ```csharp
@@ -249,45 +247,44 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
 <hr>
 
 
-# Provided Event Functionality
+# イベント機能
 <hr>
 
 |ADONEGames.CustomDebugLogger||
 |-----|-----|
-|AbstractLoggerEvent|Abstract class for additional processing|
+|AbstractLoggerEvent|追加処理の抽象クラス|
 <hr>
 
 |ADONEGames.CustomDebugLogger|||
 |-----|-----|-----|
-|ConsoleLoggerEvent|Console display|Inherit from AbstractLoggerEvent|
-|FileLoggerEvent|File output|Inherit from AbstractLoggerEvent|
+|ConsoleLoggerEvent|コンソール表示|AbstractLoggerEventを継承|
+|FileLoggerEvent|ファイル書き出し|AbstractLoggerEventを継承|
 <hr>
 
-## Registering Events
+## イベントの登録
 <hr>
 
 |ADONEGames.CustomDebugLogger|||
 |----------------------------|-----------------------------------------|-|
-| LoggerSetup                | -                                       |Initialization Class|
-| -                          | Initialize(params LoggerEventFactory[]) |Registration of additional processing|
+| LoggerSetup                | -                                       |初期化クラス|
+| -                          | Initialize(params LoggerEventFactory[]) |追加処理の登録|
 
 ```csharp
 LoggerSetup.Initialize( handler => new ConsoleLoggerEvent( handler ), handler => new FileLoggerEvent( handler ) );
 ```
 <hr>
 
-# Provided Controller Functionality
+# コントローラー機能
 <hr>
 
 |ADONEGames.CustomDebugLogger||
 |-----|-----|
-|AbstractLoggerController|Abstract class for the controller|
+|AbstractLoggerController|コントローラーの抽象クラス|
 <hr>
 
 |ADONEGames.CustomDebugLogger|||
 |-----|-----|-----|
-|ConsoleLoggerController|Console display|Inherit from AbstractLoggerController|
-<hr>
+|ConsoleLoggerController|コンソール表示|AbstractLoggerControllerを継承|
 
 ```csharp
 ConsoleLoggerController.Log( "Hello World!" );
@@ -298,11 +295,14 @@ ConsoleLoggerController.LogError( "Hello World!" );
 ```
 <hr>
 
-### License
+
+### ライセンス
 <hr>
 
-This software is released under the MIT License.  
-You are free to use it within the bounds of the license.  
-When using it, please include the following copyright and license notices.
+本ソフトウェアはMITライセンスで公開しています。  
+ライセンスの範囲内で自由に使用可能です。  
+使用する際は、以下の著作権表示とライセンス表示をお願いします。  
+<hr>
 
 [LICENSE](https://github.com/ADONE-Games/CustomDebugLogger/blob/main/LICENSE)
+<hr>
