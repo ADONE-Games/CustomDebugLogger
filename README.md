@@ -3,8 +3,6 @@
 ![DebugLog](https://img.shields.io/badge/Unity-DebugLog-FFFFFF)
 
 # Table of Contents
-<hr>
-
 - [Description](#description)
   - [Function structure](#function-structure)
 - [Usage](#usage)
@@ -15,106 +13,93 @@
 - [Provided Event Functionality](#provided-event-functionality)
   - [Registering Events](#registering-events)
 - [Provided Controller Functionality](#provided-controller-functionality)
-<hr>
 
 - [License](#license)
 <hr>
 
 # Description
-<hr>
 
 Add custom processing before being displayed in the console using Debug.Log, Debug.LogWarning, Debug.LogError, etc.
 <hr>
 
 ## Function structure
+
 ```mermaid
 classDiagram
-    direction TB
+  direction TB
 
-    namespace UnityEngine {
-        class ILogHandler {
-            <<interface>>
-            + LogFormat(LogType, UnityEngine.Object, string, params object[]): ~void~
-            + LogException(Exception, Object): ~void~
-        }
-        class ILogger {
-            <<interface>>
-            + logHandler : ~ILogHandler~
-        }
-        class Debug {
-            + Log(string): ~void~
-            + Log(string, UnityEngine.Object): ~void~
-            + LogWarning(string): ~void~
-            + LogWarning(string, UnityEngine.Object): ~void~
-            + LogError(string): ~void~
-            + LogError(string, UnityEngine.Object): ~void~
-        }
-        class Logger{
-            + logHandler[ LoggerEventManager ] : ILogHandler
-        }
+    class ILogHandler {
+        <<interface>>
+        + LogFormat(LogType, UnityEngine.Object, string, params object[]): ~void~
+        + LogException(Exception, Object): ~void~
     }
-    
-    namespace System {
-        class IDisposable {
-            <<interface>>
-            + Dispose(): ~void~
-        }
+    class ILogger {
+        <<interface>>
+        + logHandler : ~ILogHandler~
+    }
+    class Debug {
+        + Log(string): ~void~
+        + Log(string, UnityEngine.Object): ~void~
+        + LogWarning(string): ~void~
+        + LogWarning(string, UnityEngine.Object): ~void~
+        + LogError(string): ~void~
+        + LogError(string, UnityEngine.Object): ~void~
+    }
+    class Logger{
+        + logHandler[ LoggerEventManager ] : ILogHandler
     }
 
-    namespace ADONEGames_CustomDebugLogger_internal {
-        class ILoggerEvent {
-            <<interface>>
-        }
-        class LoggerEventManager {
-            - OriginalDebugLogHandler[ DebugLogHandler ] : ~ILogHandler~
-            + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
-            + LogException(Exception, UnityEngine.Object): ~void~
-        }
+    class IDisposable {
+        <<interface>>
+        + Dispose(): ~void~
     }
 
-    namespace ADONEGames_CustomDebugLogger_public {
-        class LoggerSetup {
-            + Initialize(params LoggerEventFactory[]): ~AbstractLoggerEvent~
-        }
-        class AbstractLoggerEvent {
-            <<abstract>>
-            # OriginalDebugLogHandler : ~ILogHandler~
-            + LogForamt(LogType, UnityEngine.Object, string, params object[])*: abstract ~void~
-            + LogException(Exception, UnityEngine.Object)*: abstract ~void~
-            + Dispose(): virtual ~void~
-        }
+    class ILoggerEvent {
+        <<interface>>
+    }
+    class LoggerEventManager {
+        - OriginalDebugLogHandler[ DebugLogHandler ] : ~ILogHandler~
+        + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
+        + LogException(Exception, UnityEngine.Object): ~void~
+    }
 
-        class ConsoleLoggerEvent {
-            + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
-            + LogException(Exception, UnityEngine.Object): ~void~
-        }
-        class FileLoggerEvent {
-            + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
-            + LogException(Exception, UnityEngine.Object): ~void~
-        }
+    class LoggerSetup {
+        + Initialize(params LoggerEventFactory[]): ~AbstractLoggerEvent~
+    }
+    class AbstractLoggerEvent {
+        <<abstract>>
+        # OriginalDebugLogHandler : ~ILogHandler~
+        + LogForamt(LogType, UnityEngine.Object, string, params object[])*: abstract ~void~
+        + LogException(Exception, UnityEngine.Object)*: abstract ~void~
+        + Dispose(): virtual ~void~
+    }
 
-        class AbstractLoggerController{
-            <<abstract>>
-            # Prefix : abstract ~string~ 
-            + Log(string)$ : ~void~
-            + Log(string, UnityEngine.Color32)$ : ~void~
-            + LogWarning(string)$ : ~void~
-            + LogWarning(string, UnityEngine.Color32)$ : ~void~
-            + LogError(string)$ : ~void~
-        }
-        class ConsoleLoggerController{
-            # Prefix : ~string~
-        }
+    class ConsoleLoggerEvent {
+        + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
+        + LogException(Exception, UnityEngine.Object): ~void~
     }
-    
-    namespace view {
-        class DebugLogHandler [ "DebugLogHandler : < ILogHandler>" ]
-        class console
+    class FileLoggerEvent {
+        + LogForamt(LogType, UnityEngine.Object, string, params object[]): ~void~
+        + LogException(Exception, UnityEngine.Object): ~void~
     }
-    
-    namespace io {
-        class FileOutput
+
+    class AbstractLoggerController{
+        <<abstract>>
+        # Prefix : abstract ~string~ 
+        + Log(string)$ : ~void~
+        + Log(string, UnityEngine.Color32)$ : ~void~
+        + LogWarning(string)$ : ~void~
+        + LogWarning(string, UnityEngine.Color32)$ : ~void~
+        + LogError(string)$ : ~void~
     }
+    class ConsoleLoggerController{
+        # Prefix : ~string~
+    }
+
+    class DebugLogHandler [ "DebugLogHandler : < ILogHandler>" ]
+    class console
+
+    class FileOutput
 
     ILogHandler <|-- Logger
     ILogHandler <|-- ILogger
@@ -147,36 +132,31 @@ classDiagram
 
 ```mermaid
 classDiagram
-    direction TB
+  direction TB
 
-    namespace UnityEngine {
-        class ILogHandler {
-            <<interface>>
-            + LogFormat(LogType, UnityEngine.Object, string, params object[]): ~void~
-            + LogException(Exception, UnityEngine.Object): ~void~
-        }
-        class ILogger {
-            <<interface>>
-            + logHandler : ~ILogHandler~
-        }
-        class Debug {
-            + Log(string): ~void~
-            + Log(string, UnityEngine.Object): ~void~
-            + LogWarning(string): ~void~
-            + LogWarning(string, UnityEngine.Object): ~void~
-            + LogError(string): ~void~
-            + LogError(string, UnityEngine.Object): ~void~
-        }
-        class Logger{
-            + logHandler[DebugLogHandler] : ~ILogHandler~
-        }
+    class ILogHandler {
+        <<interface>>
+        + LogFormat(LogType, UnityEngine.Object, string, params object[]): ~void~
+        + LogException(Exception, UnityEngine.Object): ~void~
     }
-    
+    class ILogger {
+        <<interface>>
+        + logHandler : ~ILogHandler~
+    }
+    class Debug {
+        + Log(string): ~void~
+        + Log(string, UnityEngine.Object): ~void~
+        + LogWarning(string): ~void~
+        + LogWarning(string, UnityEngine.Object): ~void~
+        + LogError(string): ~void~
+        + LogError(string, UnityEngine.Object): ~void~
+    }
+    class Logger{
+        + logHandler[DebugLogHandler] : ~ILogHandler~
+    }
    
-    namespace view {
-        class DebugLogHandler [ "DebugLogHandler : ~ILogHandler~" ]
-        class console
-    }
+    class DebugLogHandler [ "DebugLogHandler : ~ILogHandler~" ]
+    class console
 
     ILogHandler <|-- Logger
     ILogHandler <|-- ILogger
@@ -191,17 +171,14 @@ classDiagram
 <hr>
 
 # Usage
-<hr>
 
 Create your own class inheriting from ```ADONEGames.CustomDebugLogger.AbstractLoggerEvent```.  
 Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params LoggerEventFactory[] )```.
 <hr>
 
 ## Initialize
-<hr>
 
 ### Example 1
-<hr>
 
 ```csharp
     public class LoggerTest : MonoBehaviour
@@ -212,10 +189,8 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
         }
     }
 ```
-<hr>
 
 ### Example 2
-<hr>
 
 ```csharp
     public class LoggerTest
@@ -231,7 +206,6 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
 <hr>
 
 ## Run
-<hr>
 
 ```csharp
     public class ButtonTrigger : MonoBehaviour
@@ -246,16 +220,16 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
         }
     }
 ```
+
+https://github.com/ADONE-Games/CustomDebugLogger/assets/41104542/daf1c788-48b4-418c-aac7-8c42a838545e
 <hr>
 
 
 # Provided Event Functionality
-<hr>
 
 |ADONEGames.CustomDebugLogger||
 |-----|-----|
 |AbstractLoggerEvent|Abstract class for additional processing|
-<hr>
 
 |ADONEGames.CustomDebugLogger|||
 |-----|-----|-----|
@@ -264,7 +238,6 @@ Specify it using ```ADONEGames.CustomDebugLogger.LoggerSetup.Initialize( params 
 <hr>
 
 ## Registering Events
-<hr>
 
 |ADONEGames.CustomDebugLogger|||
 |----------------------------|-----------------------------------------|-|
@@ -277,17 +250,14 @@ LoggerSetup.Initialize( handler => new ConsoleLoggerEvent( handler ), handler =>
 <hr>
 
 # Provided Controller Functionality
-<hr>
 
 |ADONEGames.CustomDebugLogger||
 |-----|-----|
 |AbstractLoggerController|Abstract class for the controller|
-<hr>
 
 |ADONEGames.CustomDebugLogger|||
 |-----|-----|-----|
 |ConsoleLoggerController|Console display|Inherit from AbstractLoggerController|
-<hr>
 
 ```csharp
 ConsoleLoggerController.Log( "Hello World!" );
@@ -298,11 +268,12 @@ ConsoleLoggerController.LogError( "Hello World!" );
 ```
 <hr>
 
+
 ### License
-<hr>
 
 This software is released under the MIT License.  
 You are free to use it within the bounds of the license.  
 When using it, please include the following copyright and license notices.
 
 [LICENSE](https://github.com/ADONE-Games/CustomDebugLogger/blob/main/LICENSE)
+<hr>
