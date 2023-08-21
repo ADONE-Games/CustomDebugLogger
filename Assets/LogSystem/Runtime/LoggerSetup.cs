@@ -6,6 +6,10 @@ namespace ADONEGames.CustomDebugLogger
     {
         private static ILoggerEvent LoggerEventInstance { get; set; }
 
+        /// <summary>
+        /// LoggerEventの登録を行う
+        /// </summary>
+        /// <param name="loggerEventFactories">登録するLoggerEvent</param>
         public static void Initialize( params LoggerEventFactory[] loggerEventFactories )
         {
             LoggerEventInstance ??= new LoggerEventManager( loggerEventFactories );
